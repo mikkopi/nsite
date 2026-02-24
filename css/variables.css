@@ -1,0 +1,46 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,800;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Michroma&display=swap');
+
+:root {
+    /* Colors */
+    --color-bg: #181818;
+    --color-text: #ffffff;
+    --color-accent: #C10404;
+    /* Deep Red */
+    --color-hero-bg: #C10404;
+    --color-hero-text: #ffffff;
+    --color-text-light: #a1a1aa;
+    /* Dark Grey for body visibility */
+    --color-border: #27272a;
+
+    /* Spacing based on 50px @ 1440 */
+    --margin-side: 3.47vw;
+    /* 50/1440 */
+    --margin-top: 6.94vw;
+    /* 100/1440 */
+    --margin-bottom: 6.94vw;
+    /* 100/1440 */
+    --gap-grid: 1.39vw;
+    /* 20/1440 */
+    --radius-card: 12px;
+
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-heading-hero: 'Michroma', sans-serif;
+    --font-body: 'Lora', serif;
+
+    /* Font Sizes (Fluid Scaling) */
+    /* 64px @ 1440px -> 4.44vw */
+    --fs-hero: clamp(2.5rem, 4.44vw, 4rem);
+    /* 36px @ 1440px -> 2.5vw */
+    --fs-h1: clamp(1.5rem, 2.5vw, 2.25rem);
+    /* 36px @ 1440px -> 2.5vw (Tagline) */
+    --fs-tagline: clamp(1.5rem, 2.5vw, 2.25rem);
+    /* 24px @ 1440px -> 1.66vw */
+    --fs-h2: clamp(1.25rem, 1.66vw, 1.5rem);
+    /* 20px @ 1440px -> 1.38vw */
+    --fs-h3: clamp(1.1rem, 1.38vw, 1.25rem);
+    /* 16px @ 1440px -> 1.11vw */
+    --fs-body: clamp(0.9rem, 1.11vw, 1rem);
+    --fs-small: 0.875rem;
+}

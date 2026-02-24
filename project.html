@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - Mikkopi</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/data.js"></script>
+    <style>
+        /* Specific detail page overrides if needed */
+        .project-content h2 {
+            font-family: var(--font-heading-hero);
+            /* Michroma per req */
+            font-size: 1.5rem;
+            /* 24px */
+            margin-top: 3rem;
+        }
+
+        .project-content h3 {
+            font-family: var(--font-heading);
+            font-style: italic;
+            /* Playfair Italic 24px per req */
+            font-size: 1.5rem;
+        }
+
+        .project-content h4 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            /* Playfair ExtraBold 20px per req */
+            font-size: 1.25rem;
+        }
+
+        .project-content p {
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            font-family: var(--font-heading);
+        }
+    </style>
+</head>
+
+<body class="project-detail">
+    <div id="app">
+        <header class="site-header" id="header">
+            <a href="index.html" class="logo">
+                <img src="assets/mikkopi.png" alt="Mikkopi" id="site-logo">
+            </a>
+        </header>
+
+        <main id="project-target">
+            <!-- Injected by JS -->
+        </main>
+
+        <div class="index-link-wrap">
+            <a href="index.html" class="index-link">&larr; Index</a>
+        </div>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <!-- About Section (Unified) -->
+                <section class="about-section">
+                    <h2 class="about-heading">About <img src="assets/about_stroke.png" class="stroke" alt=""></h2>
+                    <div class="about-body">
+                        <div>
+                            <p>Not so much a design thinker than a design doer. Maybe also a thinker. Believes in
+                                process,
+                                but can also work without it. Likes decisiveness. Knows a lot about emerging
+                                technologies.
+                                Knows a lot about forgotten technologies. VHS, you say? How about CED or VHD? Much
+                                better.
+                                Tall. Motion graphics and industrial design too.</p>
+                        </div>
+                        <div>
+                            <p>Hardware is fun. Wireframes? Sure, but not without proper concept. Made his own dining
+                                table,
+                                because couldn't find a nice one. Can assemble a motorcycle gearbox. Reads Wikipedia for
+                                fun. Has memorised half of it. Polaroid aficionado. Star Wars or Star Trek? &mdash;Star
+                                Trek. Ask for my CV directly from me.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="footer-bottom">
+                    <div class="footer-links">
+                        <a href="mailto:hello@mikkopi.com" class="footer-link">hello@mikkopi.com</a>
+                        <a href="https://www.linkedin.com/in/mikkopi" class="footer-link" target="_blank">LinkedIn</a>
+                        <a href="https://medium.com/@remotemikko" class="footer-link" target="_blank">Medium</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function getParams() {
+            return new URLSearchParams(window.location.search);
+        }
+
+        function renderProject() {
+            const slug = getParams().get('slug');
+            const project = projects.find(p => p.slug === slug);
+            const container = document.getElementById('project-target');
+
+            if (!project) {
+                container.innerHTML = '<div style="padding: 200px; text-align:center;"><h1>Project not found</h1><a href="index_static.html">Back to Index</a></div>';
+                return;
+            }
+
+            document.title = `${project.title} - Mikkopi`;
+
+            container.innerHTML = `
+                <div class="project-content">
+                    ${project.content_html}
+                </div>
+            `;
+        }
+
+        function handleScroll() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        window.onload = () => {
+            renderProject();
+            window.addEventListener('scroll', handleScroll);
+        };
+    </script>
+</body>
+
+</html>

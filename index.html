@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikkopi - Portfolio</title>
+    <meta name="description" content="Selected works 2014-2037. No nonsense, just design. Physical and digital.">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/data.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header class="site-header" id="header">
+            <a href="index.html" class="logo">
+                <img src="assets/mikkopi.png" alt="Mikkopi" id="site-logo">
+            </a>
+        </header>
+
+        <main>
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-main-text">Selected<br>works</h1>
+                    <div class="hero-year-text">2014-2037</div>
+                    <div class="hero-sub-text">No nonsense, just design.<br>Physical and digital.</div>
+                </div>
+                <img src="assets/indicator.png" class="scroll-indicator-img" id="scroll-indicator" alt="Scroll Down">
+            </section>
+
+            <!-- Featured Row -->
+            <section id="featured-row" class="featured-row">
+                <!-- Injected by JS -->
+            </section>
+
+            <!-- Design Work Label -->
+            <div class="section-label">
+                <h2>Design Work <img src="assets/dd_stroke.png" class="stroke" alt=""></h2>
+            </div>
+
+            <!-- Design Work Grid Row 1 -->
+            <section id="grid-row-1" class="card-grid">
+                <!-- Injected by JS -->
+            </section>
+
+            <!-- Feature Highlight -->
+            <section id="feature-highlight" class="feature-highlight">
+                <!-- Injected by JS -->
+            </section>
+
+            <!-- Design Work Grid Row 2 -->
+            <section id="grid-row-2" class="card-grid">
+                <!-- Injected by JS -->
+            </section>
+
+            <!-- Design Work Grid Row 3 -->
+            <section id="grid-row-3" class="card-grid">
+                <!-- Injected by JS -->
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <!-- About Section (Now inside footer) -->
+                <section class="about-section">
+                    <h2 class="about-heading">About <img src="assets/about_stroke.png" class="stroke" alt=""></h2>
+                    <div class="about-body">
+                        <div>
+                            <p>Not so much a design thinker than a design doer. Maybe also a thinker. Believes in
+                                process,
+                                but can also work without it. Likes decisiveness. Knows a lot about emerging
+                                technologies.
+                                Knows a lot about forgotten technologies. VHS, you say? How about CED or VHD? Much
+                                better.
+                                Tall. Motion graphics and industrial design too.</p>
+                        </div>
+                        <div>
+                            <p>Hardware is fun. Wireframes? Sure, but not without proper concept. Made his own dining
+                                table,
+                                because couldn't find a nice one. Can assemble a motorcycle gearbox. Reads Wikipedia for
+                                fun. Has memorised half of it. Polaroid aficionado. Star Wars or Star Trek? &mdash;Star
+                                Trek. Ask for my CV directly from me.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="footer-bottom">
+                    <div class="footer-links">
+                        <a href="mailto:hello@mikkopi.com" class="footer-link">hello@mikkopi.com</a>
+                        <a href="https://www.linkedin.com/in/mikkopi" class="footer-link" target="_blank">LinkedIn</a>
+                        <a href="https://medium.com/@remotemikko" class="footer-link" target="_blank">Medium</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        /* ===================================================
+         * Section Configuration
+         * =================================================== */
+
+        const sectionConfig = {
+            featuredRow: [
+                { slug: 'transportation-and-mobility', img: 'assets/transportation.png' },
+                { slug: 'experiments', img: 'assets/experiments.png' }
+            ],
+            gridRow1: [
+                'volvo-build-price',
+                'samsung-j-series',
+                'birds-of-north-america',
+                'viking-line'
+            ],
+            featureHighlights: [
+                {
+                    slug: 'rolls-royce',
+                    heading: 'ROLLS-ROYCE MOTOR CARS',
+                    body: '7+ years leading UX and digital strategy. Website redesign, dealer network integration, e-commerce foundation and design system.',
+                    img: 'assets/rolls.png',
+                    btnImg: 'assets/btn.png'
+                }
+            ],
+            gridRow2: [
+                'startup-pitch',
+                'alicia-t',
+                'dental-radiology-viewer',
+                'f-secure-sense'
+            ],
+            gridRow3: [
+                'general-mobile-phone-design',
+                'jio',
+                'traffic-safety',
+                'smaller-projects'
+            ]
+        };
+
+        const featuredDescriptions = {
+            'transportation-and-mobility': 'I have worked on a lot of transportation & mobility related projects. These are the case studies.',
+            'experiments': 'This is a collection of non-paid work where I have done what I felt like doing'
+        };
+
+        /* ===================================================
+         * Helpers
+         * =================================================== */
+
+        function getProject(slug) {
+            return projects.find(p => p.slug === slug);
+        }
+
+        function cleanTitle(title) {
+            return title.split(' — ')[0].split(' - ')[0];
+        }
+
+        /* ===================================================
+         * Renderers
+         * =================================================== */
+
+        function renderFeaturedRow() {
+            const container = document.getElementById('featured-row');
+            container.innerHTML = sectionConfig.featuredRow.map(cfg => {
+                const p = getProject(cfg.slug);
+                if (!p) return '';
+                const desc = featuredDescriptions[cfg.slug] || '';
+                return `
+                    <a href="project.html?slug=${p.slug}" class="featured-card">
+                        <div class="featured-image-wrap">
+                            <img src="${cfg.img}" alt="${p.title}" loading="lazy">
+                        </div>
+                        <div class="featured-info">
+                            <h2 class="featured-title">${cleanTitle(p.title)}</h2>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function renderGridRow(containerId, slugs) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = slugs.map(slug => {
+                const p = getProject(slug);
+                if (!p) return '';
+                // Use the static logo from assets/ folder based on slug
+                let imgPath = `assets/${p.slug.split('-')[0]}.png`;
+                if (p.slug === 'startup-pitch') imgPath = 'assets/oo.png';
+                if (p.slug === 'alicia-t') imgPath = 'assets/aliciat.png';
+                if (p.slug === 'dental-radiology-viewer') imgPath = 'assets/planmeca.png';
+                if (p.slug === 'f-secure-sense') imgPath = 'assets/sense.png';
+                if (p.slug === 'viking-line') imgPath = 'assets/viking.png';
+                if (p.slug === 'birds-of-north-america') imgPath = 'assets/nationalgeo.png';
+                if (p.slug === 'traffic-safety') imgPath = 'assets/hp.png';
+                if (p.slug === 'smaller-projects') imgPath = 'assets/smallprojects.png';
+                if (p.slug === 'general-mobile-phone-design') imgPath = 'assets/generalmobile.png';
+
+                return `
+                    <a href="project.html?slug=${p.slug}" class="grid-card">
+                        <div class="card-visual">
+                            <img src="${imgPath}" alt="${cleanTitle(p.title)}" loading="lazy">
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">${cleanTitle(p.title)}</span>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function renderFeatureHighlights() {
+            const container = document.getElementById('feature-highlight');
+            const cfg = sectionConfig.featureHighlights[0];
+            if (!cfg) return;
+            const p = getProject(cfg.slug);
+            if (!p) return;
+            container.innerHTML = `
+                <div class="feature-image-wrap">
+                    <img src="${cfg.img}" alt="${cfg.heading}" loading="lazy">
+                </div>
+                <div class="feature-text">
+                    <h3>${cfg.heading}</h3>
+                    <p>${cfg.body}</p>
+                    <a href="project.html?slug=${p.slug}" class="feature-cta">
+                        <img src="${cfg.btnImg}" class="feature-cta-img" alt="View Project">
+                    </a>
+                </div>
+            `;
+        }
+
+        /* ===================================================
+         * Interactions
+         * =================================================== */
+
+        function handleScroll() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        /* ===================================================
+         * Init
+         * =================================================== */
+
+        function init() {
+            if (typeof projects === 'undefined') {
+                console.error('Data not loaded from js/data.js');
+                return;
+            }
+
+            renderFeaturedRow();
+            renderGridRow('grid-row-1', sectionConfig.gridRow1);
+            renderFeatureHighlights();
+            renderGridRow('grid-row-2', sectionConfig.gridRow2);
+            renderGridRow('grid-row-3', sectionConfig.gridRow3);
+
+            window.addEventListener('scroll', handleScroll);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+
+</html>
