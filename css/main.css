@@ -143,6 +143,8 @@ img {
 .hero.redesigned .hero-main-text.multi-layer span {
     position: relative;
     display: block;
+    width: max-content;
+    margin: 0 auto;
 }
 
 .hero.redesigned .hero-main-text.multi-layer span::before {
@@ -161,13 +163,12 @@ img {
     width: 100%;
 }
 
-.hero-year-text {
+.hero.redesigned .hero-year-text {
     font-family: var(--font-heading-hero);
     font-size: var(--fs-h1);
     margin-bottom: 2rem;
     text-transform: uppercase;
-    letter-spacing: -0.04em;
-    /* Set to -4% per req */
+    letter-spacing: -0.04em !important;
 }
 
 .hero-sub-text {
