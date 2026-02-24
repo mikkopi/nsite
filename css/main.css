@@ -580,11 +580,11 @@ img {
     .hero.redesigned {
         background-size: 100% auto;
         /* Scale up rays on mobile */
-        padding: 0 1rem;
+        padding: 0 15px;
     }
 
     .hero.redesigned .hero-main-text.multi-layer {
-        font-size: 18vw;
+        font-size: 25vw;
     }
 
     .redesigned-indicator {
