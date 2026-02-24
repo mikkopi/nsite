@@ -626,23 +626,29 @@ img {
     }
 }
 
+
 /* === Laptop height-based scaling === */
-@media (max-height: 850px) and (min-width: 601px) {
+@media (max-height: 950px) and (min-width: 601px) {
     .hero.redesigned .hero-main-text.multi-layer {
-        font-size: clamp(3rem, 18vh, 130px);
-        /* Scale by height */
+        font-size: clamp(3rem, 16vh, 110px);
+        /* Iteration 2: Scale down further */
     }
 
     .hero.redesigned {
-        padding-top: 240px;
-        /* Fixed: Clears the large logo */
-        padding-bottom: 40px;
+        padding-top: 280px;
+        /* Iteration 2: Maximum clearance for logo */
+        padding-bottom: 80px;
+        /* Iteration 2: More room at bottom */
         justify-content: flex-start;
         /* Start from top with padding */
     }
 
+    .hero.redesigned .hero-main-text.multi-layer {
+        margin-bottom: 1rem;
+    }
+
     .hero.redesigned .hero-year-text {
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.5rem;
     }
 
     .hero-sub-text {
@@ -651,6 +657,6 @@ img {
     }
 
     .scroll-indicator-img {
-        bottom: 25px;
+        bottom: 30px;
     }
 }
