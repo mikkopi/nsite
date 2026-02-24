@@ -154,12 +154,11 @@ img {
     /* 5px left */
     z-index: -1;
     color: #ff4800;
-    /* Explicitly ensure no transition or transform is interfering */
+    /* Reset any inherited transforms */
     transform: none;
-    /* 2px stroke #1d1d1d aligned inside */
     -webkit-text-stroke: 4px #1d1d1d;
-    /* Using stroke to simulate the offset/layer effect */
-    /* Note: 'aligned inside' isn't natively supported, so we use a thicker stroke on a background layer */
+    display: block;
+    width: 100%;
 }
 
 .hero-year-text {
@@ -167,7 +166,8 @@ img {
     font-size: var(--fs-h1);
     margin-bottom: 2rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: -0.04em;
+    /* Set to -4% per req */
 }
 
 .hero-sub-text {
