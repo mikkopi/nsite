@@ -57,7 +57,7 @@ img {
     width: 100%;
     padding: 2rem var(--margin-side);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     z-index: 1000;
     transition: padding 0.3s ease;
@@ -425,7 +425,7 @@ img {
 
 .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
