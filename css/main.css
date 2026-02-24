@@ -128,7 +128,8 @@ img {
 /* Redesigned Hero specific styles */
 .hero.redesigned .hero-main-text.multi-layer {
     font-family: 'UnifrakturCook', cursive;
-    font-size: 196px;
+    font-size: clamp(3rem, 15vw, 196px);
+    /* Fluid scaling */
     line-height: 0.83;
     letter-spacing: -0.03em;
     text-transform: none;
@@ -574,6 +575,20 @@ img {
     .scroll-indicator-img {
         width: 40px;
         /* Scale down indicator on mobile */
+    }
+
+    .hero.redesigned {
+        background-size: 100% auto;
+        /* Scale up rays on mobile */
+        padding: 0 1rem;
+    }
+
+    .hero.redesigned .hero-main-text.multi-layer {
+        font-size: 18vw;
+    }
+
+    .redesigned-indicator {
+        width: 20px;
     }
 
     .card-grid {
