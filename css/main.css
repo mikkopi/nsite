@@ -104,7 +104,8 @@ img {
     /* Center horizontally */
     text-align: center;
     /* Center text content */
-    padding: 0 var(--margin-side);
+    padding: 120px var(--margin-side) 60px;
+    /* Add top padding for header space */
     overflow: hidden;
 }
 
