@@ -94,7 +94,8 @@ img {
     background-image: url('../assets/bkgrays.png');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 50% auto;
+    /* Scaled down 50% */
     color: var(--color-hero-text);
     display: flex;
     flex-direction: column;
@@ -153,6 +154,8 @@ img {
     /* 5px left */
     z-index: -1;
     color: #ff4800;
+    /* Explicitly ensure no transition or transform is interfering */
+    transform: none;
     /* 2px stroke #1d1d1d aligned inside */
     -webkit-text-stroke: 4px #1d1d1d;
     /* Using stroke to simulate the offset/layer effect */
