@@ -72,6 +72,8 @@ img {
     width: 250px;
     height: auto;
     transition: width 0.3s ease;
+    display: block;
+    /* Ensure no extra space below image */
 }
 
 .site-header.scrolled .logo img {
@@ -89,6 +91,10 @@ img {
     width: 100%;
     min-height: 100vh;
     background-color: var(--color-hero-bg);
+    background-image: url('../assets/bkgrays.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: var(--color-hero-text);
     display: flex;
     flex-direction: column;
@@ -141,8 +147,10 @@ img {
 .hero.redesigned .hero-main-text.multi-layer span::before {
     content: attr(data-text);
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5px;
+    /* 5px down */
+    left: -5px;
+    /* 5px left */
     z-index: -1;
     color: #ff4800;
     /* 2px stroke #1d1d1d aligned inside */
@@ -180,8 +188,8 @@ img {
 }
 
 .redesigned-indicator {
-    width: 60px;
-    /* Slightly smaller scale */
+    width: 30px;
+    /* 50% smaller than the previous 60px */
     opacity: 0.8;
 }
 
