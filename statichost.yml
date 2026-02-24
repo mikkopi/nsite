@@ -1,0 +1,7 @@
+# FILENAME: statichost.yml
+# Use a simple alpine image since we don't need to 'build' anything
+image: alpine:latest
+# We don't have a build command, so we just 'do nothing'
+command: "true"
+# This tells the host: 'My website files are right here in the main folder'
+public: .
