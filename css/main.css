@@ -625,38 +625,41 @@ img {
 
 /* === Laptop height-based scaling === */
 @media (max-height: 950px) and (min-width: 601px) {
+    .logo img {
+        width: clamp(150px, 20vh, 250px);
+        /* Scale logo dynamically based on height */
+    }
+
     .hero.redesigned .hero-main-text.multi-layer {
-        font-size: clamp(3rem, 16vh, 110px);
-        /* Iteration 2: Scale down further */
+        font-size: clamp(3rem, 15vh, 120px);
+        /* Fluid scaling based on height */
+        margin-bottom: 2vh;
     }
 
     .hero.redesigned {
-        padding-top: 280px;
-        /* Iteration 2: Maximum clearance for logo */
-        padding-bottom: 80px;
-        /* Iteration 2: More room at bottom */
+        padding-top: clamp(180px, 25vh, 280px);
+        /* Dynamic top padding to clear logo */
+        padding-bottom: 60px;
         justify-content: flex-start;
-        /* Start from top with padding */
-    }
-
-    .hero.redesigned .hero-main-text.multi-layer {
-        margin-bottom: 1rem;
+        height: 100vh;
+        /* Ensure full height coverage */
     }
 
     .hero.redesigned .hero-year-text {
-        margin-bottom: 0.5rem;
+        margin-bottom: 1vh;
     }
 
     .hero-sub-text {
-        font-size: 1.1rem;
-        margin-bottom: 3rem;
+        font-size: 1rem;
+        margin-bottom: 2rem;
         /* Space before indicator */
     }
 
     .scroll-indicator-img {
         position: relative;
         bottom: auto;
-        margin-top: 0;
-        margin-bottom: 40px;
+        margin-top: auto;
+        /* Push to bottom of flex container */
+        margin-bottom: 4vh;
     }
 }
