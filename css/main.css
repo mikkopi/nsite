@@ -128,7 +128,7 @@ img {
 
 /* Redesigned Hero specific styles */
 .hero.redesigned .hero-main-text.multi-layer {
-    font-size: clamp(3rem, calc(0.31 * (100vw - 30px)), 196px);
+    font-size: clamp(3rem, calc((100vw - 30px) / 3.22), 196px);
     /* Precision scaling: maintains exactly 15px margins for 'Shipping' word */
     line-height: 0.83;
     letter-spacing: -0.03em;
@@ -649,15 +649,14 @@ img {
 
     .hero-sub-text {
         font-size: 1.1rem;
-        margin-bottom: 2rem;
-        /* Space for indicator */
+        margin-bottom: 3rem;
+        /* Space before indicator */
     }
 
     .scroll-indicator-img {
         position: relative;
-        /* Take out of absolute to stay in flow */
         bottom: auto;
         margin-top: 0;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     }
 }
