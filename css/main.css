@@ -90,6 +90,9 @@ img {
     position: relative;
     width: 100%;
     min-height: 100vh;
+    /* 100svh = stable small viewport height — fixes iOS Safari bug where 100vh
+       includes the URL bar, pushing the absolute indicator off-screen */
+    min-height: 100svh;
     background-color: var(--color-hero-bg);
     background-image: url('../assets/bkgrays.png');
     background-position: center;
@@ -101,9 +104,10 @@ img {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* Top padding clears the fixed logo; bottom ensures content never
-       overlaps the absolute-positioned indicator (60px from bottom) */
-    padding: 140px 15px 160px;
+    /* padding-top: clears the fixed logo (logo ~108px tall + 32px header padding).
+       padding-bottom: keeps flex content away from the absolute indicator zone
+       (indicator at bottom:60px, ~80px tall = indicator top at vh-140px) */
+    padding: 140px 15px 200px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -131,11 +135,10 @@ img {
 ------------------------------------------------------- */
 .hero.redesigned .hero-main-text.multi-layer {
     font-family: 'UnifrakturCook', cursive;
-    /* Clamp so 'Shipping' always has exactly 15px L+R margins.
-       Divisor 3.22 = natural width of 'Shipping' at this font ÷ font-size.
-       Subtract 30px (2 × 15px) from viewport width before dividing.
-       Max caps at large desktop; min keeps it readable on tiny screens. */
-    font-size: clamp(3rem, calc((100vw - 30px) / 3.22), 196px);
+    /* Primary driver: vw formula keeps 'Shipping' at 15px side margins.
+       Secondary cap: 30vh ensures three lines + spacing always fit within
+       the viewport height on any device (incl. short mobile phones). */
+    font-size: clamp(3rem, min(calc((100vw - 30px) / 3.22), 30vh), 196px);
     line-height: 0.83;
     letter-spacing: -0.03em;
     text-transform: none;
@@ -167,7 +170,7 @@ img {
     z-index: -1;
     color: #ff4800;
     transform: none;
-    -webkit-text-stroke: 4px #1d1d1d;
+    -webkit-text-stroke: 2px #1d1d1d;
     display: block;
     width: 100%;
     white-space: nowrap;
@@ -190,7 +193,7 @@ img {
     font-style: normal;
     font-size: 20px;
     line-height: 1;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.04em;
     max-width: 600px;
     opacity: 0.9;
 }
@@ -583,6 +586,9 @@ img {
     /* Scale up background rays on narrow viewports */
     .hero.redesigned {
         background-size: 100% auto;
+        /* On mobile the vh cap on font-size shrinks the text block;
+           reduce bottom padding to keep indicator comfortably visible */
+        padding-bottom: 160px;
     }
 
     .redesigned-indicator {
@@ -626,6 +632,13 @@ img {
    with vh so all elements keep their required spacing.
    The indicator always stays at bottom: 60px (absolute).
    ========================================================= */
+/* Hide indicator on very short viewports where it causes layout issues */
+@media (max-height: 860px) {
+    .scroll-indicator-img {
+        display: none;
+    }
+}
+
 @media (max-height: 1080px) and (min-width: 601px) {
 
     /* Logo: 250px at 1080px viewport, shrinks proportionally */
@@ -638,12 +651,16 @@ img {
         width: clamp(40px, 11.57vh, 125px);
     }
 
-    /* Hero padding scales with vh so it stays proportional to the logo above
-       and leaves enough room below for the indicator (bottom: 60px absolute).
-       Minimum bottom padding = indicator bottom (60px) + indicator height (~70px) + 20px gap = 150px */
+    /* Hero padding:
+       - Top: logo height = logo_width / 2.3 aspect ratio = 23.15vh / 2.3 ≈ 10vh.
+         Add header padding (32px) + 20px gap = calc(10vh + 52px).
+         Clamped so it never goes above desktop default (140px).
+       - Bottom: keeps flex content at least 20px above the indicator top.
+         Indicator = bottom:60px + ~80px tall = indicator top at vh−140px.
+         So content bottom needs to stay at least 160px from viewport bottom. */
     .hero.redesigned {
-        padding-top: clamp(80px, 13vh, 140px);
-        padding-bottom: clamp(150px, 16vh, 160px);
+        padding-top: clamp(100px, calc(10vh + 52px), 140px);
+        padding-bottom: clamp(160px, 20vh, 200px);
     }
 
     /* Main text: driven by whichever is smaller — the vw formula (15px margins)
