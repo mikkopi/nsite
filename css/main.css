@@ -128,9 +128,8 @@ img {
 
 /* Redesigned Hero specific styles */
 .hero.redesigned .hero-main-text.multi-layer {
-    font-family: 'UnifrakturCook', cursive;
-    font-size: clamp(3rem, 15vw, 196px);
-    /* Fluid scaling */
+    font-size: clamp(3rem, calc(0.31 * (100vw - 30px)), 196px);
+    /* Precision scaling: maintains exactly 15px margins for 'Shipping' word */
     line-height: 0.83;
     letter-spacing: -0.03em;
     text-transform: none;
@@ -586,9 +585,6 @@ img {
         padding: 0 15px;
     }
 
-    .hero.redesigned .hero-main-text.multi-layer {
-        font-size: 25vw;
-    }
 
     .redesigned-indicator {
         width: 20px;
