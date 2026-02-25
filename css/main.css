@@ -95,18 +95,17 @@ img {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 50% auto;
-    /* Scaled down 50% */
     color: var(--color-hero-text);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Center horizontally */
     text-align: center;
-    /* Center text content */
-    padding: 120px var(--margin-side) 60px;
-    /* Add top padding for header space */
+    /* Top padding clears the fixed logo; bottom ensures content never
+       overlaps the absolute-positioned indicator (60px from bottom) */
+    padding: 140px 15px 160px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .hero-content {
@@ -115,6 +114,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .hero-main-text {
@@ -126,65 +126,76 @@ img {
     letter-spacing: -0.04em;
 }
 
-/* Redesigned Hero specific styles */
+/* -------------------------------------------------------
+   Redesigned Hero — Shipping / Quality / Design block
+------------------------------------------------------- */
 .hero.redesigned .hero-main-text.multi-layer {
+    font-family: 'UnifrakturCook', cursive;
+    /* Clamp so 'Shipping' always has exactly 15px L+R margins.
+       Divisor 3.22 = natural width of 'Shipping' at this font ÷ font-size.
+       Subtract 30px (2 × 15px) from viewport width before dividing.
+       Max caps at large desktop; min keeps it readable on tiny screens. */
     font-size: clamp(3rem, calc((100vw - 30px) / 3.22), 196px);
-    /* Precision scaling: maintains exactly 15px margins for 'Shipping' word */
     line-height: 0.83;
     letter-spacing: -0.03em;
     text-transform: none;
-    /* Reset for UnifrakturCook */
     color: #1d1d1d;
     display: flex;
     flex-direction: column;
     gap: 0;
     margin-bottom: 2rem;
     flex-shrink: 0;
-    /* Prevent vertical squishing */
+    width: 100%;
 }
 
 .hero.redesigned .hero-main-text.multi-layer span {
     position: relative;
     display: block;
-    width: max-content;
+    /* Use inline width so the span only occupies its text width,
+       but never exceeds the container (prevents right-edge bleed) */
+    width: fit-content;
+    max-width: 100%;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .hero.redesigned .hero-main-text.multi-layer span::before {
     content: attr(data-text);
     position: absolute;
     top: 5px;
-    /* 5px down */
     left: -5px;
-    /* 5px left */
     z-index: -1;
     color: #ff4800;
-    /* Reset any inherited transforms */
     transform: none;
     -webkit-text-stroke: 4px #1d1d1d;
     display: block;
     width: 100%;
+    white-space: nowrap;
 }
 
+/* Year text — Michroma, same as before */
 .hero.redesigned .hero-year-text {
     font-family: var(--font-heading-hero);
     font-size: var(--fs-h1);
-    margin-bottom: 2rem;
+    /* 20-30px gap above the sub-text */
+    margin-bottom: 25px;
     text-transform: uppercase;
-    letter-spacing: -0.04em !important;
+    letter-spacing: -0.04em;
 }
 
+/* Sub-text — Playfair Display 20px medium, 100% line-height, 4% letter-spacing */
 .hero-sub-text {
-    font-family: var(--font-heading);
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
     font-style: normal;
-    /* Mockup shows regular serif, not italic */
-    font-size: 1.25rem;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: 0.04em;
     max-width: 600px;
-    line-height: 1.4;
     opacity: 0.9;
 }
 
-/* Indicator Image */
+/* Indicator — always anchored 60px from the bottom of the hero */
 .scroll-indicator-img {
     position: absolute;
     bottom: 60px;
@@ -192,11 +203,11 @@ img {
     transform: translateX(-50%);
     width: auto;
     height: auto;
+    z-index: 3;
 }
 
 .redesigned-indicator {
     width: 30px;
-    /* 50% smaller than the previous 60px */
     opacity: 0.8;
 }
 
@@ -567,24 +578,12 @@ img {
 
     .logo img {
         width: 200px;
-        /* Still large on mobile but constrained */
     }
 
-    .hero-main-text {
-        font-size: 12vw;
-    }
-
-    .scroll-indicator-img {
-        width: 40px;
-        /* Scale down indicator on mobile */
-    }
-
+    /* Scale up background rays on narrow viewports */
     .hero.redesigned {
         background-size: 100% auto;
-        /* Scale up rays on mobile */
-        padding: 0 15px;
     }
-
 
     .redesigned-indicator {
         width: 20px;
@@ -612,54 +611,57 @@ img {
 
     .project-detail h1 {
         font-size: 10vw;
-        /* Fix bleed on mobile */
         word-break: break-word;
     }
 
     .project-content {
         padding: 260px 0 0;
-        /* Logo bottom (~189px) + 64px gap */
     }
 }
 
 
-/* === Laptop height-based scaling === */
-@media (max-height: 950px) and (min-width: 601px) {
+/* =========================================================
+   Shallow / short viewport scaling
+   Activates below 1080px height. Logo and big text scale
+   with vh so all elements keep their required spacing.
+   The indicator always stays at bottom: 60px (absolute).
+   ========================================================= */
+@media (max-height: 1080px) and (min-width: 601px) {
+
+    /* Logo: 250px at 1080px viewport, shrinks proportionally */
     .logo img {
-        width: clamp(150px, 20vh, 250px);
-        /* Scale logo dynamically based on height */
+        width: clamp(80px, 23.15vh, 250px);
     }
 
-    .hero.redesigned .hero-main-text.multi-layer {
-        font-size: clamp(3rem, 15vh, 120px);
-        /* Fluid scaling based on height */
-        margin-bottom: 2vh;
+    /* Scrolled logo also scales (always half of unscrolled) */
+    .site-header.scrolled .logo img {
+        width: clamp(40px, 11.57vh, 125px);
     }
 
+    /* Hero padding scales with vh so it stays proportional to the logo above
+       and leaves enough room below for the indicator (bottom: 60px absolute).
+       Minimum bottom padding = indicator bottom (60px) + indicator height (~70px) + 20px gap = 150px */
     .hero.redesigned {
-        padding-top: clamp(180px, 25vh, 280px);
-        /* Dynamic top padding to clear logo */
-        padding-bottom: 60px;
-        justify-content: flex-start;
-        height: 100vh;
-        /* Ensure full height coverage */
+        padding-top: clamp(80px, 13vh, 140px);
+        padding-bottom: clamp(150px, 16vh, 160px);
     }
 
+    /* Main text: driven by whichever is smaller — the vw formula (15px margins)
+       or the vh cap (18vh keeps it from overflowing a short viewport).
+       It scales slightly more aggressively than the logo as requested. */
+    .hero.redesigned .hero-main-text.multi-layer {
+        font-size: clamp(2rem, min(calc((100vw - 30px) / 3.22), 18vh), 196px);
+        /* Maintain at least 20px gap below the text block before year text */
+        margin-bottom: clamp(20px, 2vh, 32px);
+    }
+
+    /* Year text: at least 20px below the main text, at least 20px above subtext */
     .hero.redesigned .hero-year-text {
-        margin-bottom: 1vh;
+        margin-bottom: clamp(20px, 2vh, 25px);
     }
 
+    /* Subtext: shrink font slightly on very short viewports */
     .hero-sub-text {
-        font-size: 1rem;
-        margin-bottom: 2rem;
-        /* Space before indicator */
-    }
-
-    .scroll-indicator-img {
-        position: relative;
-        bottom: auto;
-        margin-top: auto;
-        /* Push to bottom of flex container */
-        margin-bottom: 4vh;
+        font-size: clamp(14px, 1.85vh, 20px);
     }
 }
