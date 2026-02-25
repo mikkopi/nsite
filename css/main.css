@@ -649,10 +649,15 @@ img {
 
     .hero-sub-text {
         font-size: 1.1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        /* Space for indicator */
     }
 
     .scroll-indicator-img {
-        bottom: 30px;
+        position: relative;
+        /* Take out of absolute to stay in flow */
+        bottom: auto;
+        margin-top: 0;
+        margin-bottom: 30px;
     }
 }
